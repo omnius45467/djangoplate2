@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for o in context_data %}
+        <p>Question: {{ o.question_text }}</p>
+    {% endfor %}
+{% endblock %}

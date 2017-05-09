@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Site Title{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
+</head>
+<body>
+<div class="main">
+    {% block main %}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% include "nav.html" %}
+
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+
+        </div>
+    {% endblock %}
+</div>
+</body>
+</html>
