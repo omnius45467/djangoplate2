@@ -1,3 +1,8 @@
 .vagrant/
 
 .idea
+.idea/django-vagrant.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
