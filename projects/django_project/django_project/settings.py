@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'chatterbot.ext.django_chatterbot',
     'generic_scaffold',
     'conversation.apps.ConversationConfig',
     'django.contrib.admin',
@@ -70,6 +71,19 @@ TEMPLATES = [
         },
     },
 ]
+
+CHATTERBOT = {
+    'name': 'Tech Support Bot',
+    'logic_adapters': [
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.TimeLogicAdapter',
+        'chatterbot.logic.BestMatch'
+    ],
+    'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
+    'training_data': [
+         'chatterbot.corpus.english.greetings'
+    ]
+}
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
 
