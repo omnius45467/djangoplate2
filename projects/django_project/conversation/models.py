@@ -1,11 +1,12 @@
 from django.db import models
 import datetime
 
+
 from django.utils import timezone
 
 # Create your models here.
 class Question(models.Model):
-    question_text = models.CharField(max_length=140)
+    question_text = models.CharField(max_length=1400)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
@@ -14,11 +15,14 @@ class Question(models.Model):
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
-class Choice(models.Model):
+    def get_absolute_url(self):
+        return u'/questiondetail/%d' % self.id
 
+class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=140)
-    votes = models.IntegerField(default=0)
-
+    answer_text = models.CharField(max_length=1400)
     def __str__(self):
-        return self.choice_text
+        return self.answer_text
+
+    def get_absolute_url(self):
+        return u'/answerdetail/%d' % self.id

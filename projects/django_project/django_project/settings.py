@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'generic_scaffold',
     'conversation.apps.ConversationConfig',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -15,12 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.template import Context, Template
-from django.conf.urls import url
+# from django.template import Context, Template
 
 from conversation import views
+from .worker import QuestionCrudManager
 
+question_crud = QuestionCrudManager()
+#
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
 ]
+#
+
+
+urlpatterns += question_crud.get_url_patterns()
+
