@@ -3,6 +3,18 @@
 {% block content %}
 
     <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% for o in context_data %}
+                <p>{{ o.question_text }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'form.html' %}
+        </div>
+    </div>
 
       <div class="jumbotron mt-1">
         <h1 class="jumbotron-heading text-xs-center">Django ChatterBot Example</h1>

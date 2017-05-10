@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 # from django.template import Context, Template
 from chatterbot.ext.django_chatterbot import urls as chatterbot_urls
-from conversation.views import ChatterBotAppView
+from conversation.views import ChatterBotAppView, FormView
 
 from conversation import views
 from .worker import QuestionCrudManager, AnswerCrudManager
@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^chatterbot/', include('chatterbot.ext.django_chatterbot.urls', namespace='chatterbot')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', ChatterBotAppView.as_view(), name='main'),
+    url(r'^form/', FormView, name='form'),
     # url(r'^$', views.home, name='home'),
 ]
 #
