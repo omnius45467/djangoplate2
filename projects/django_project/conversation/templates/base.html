@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Site Title{% endblock %}</title>
+    <title>{% block title %}LCARS 001{% endblock %}</title>
     {#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
     {#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
     {% load static %}
@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
     <style>
         body {
+            height: 100%;
+            width: 100%;
             background: black;
             font-family: 'Ubuntu Condensed', sans-serif;
         }
@@ -20,42 +22,127 @@
 <body>
 <div class="main">
     {% block main %}
-        {% include "header.html" %}
+        <header id="header">
+            {% include "header.html" %}
+        </header>
+
         <div class="lcars-row spaced">
             <div class="lcars-column tall u-1-8">
 
-                <ul class="lcars-menu">
-                    <li class="lcars-blue-bg"><a href="#">Testing</a></li>
-                    <li class="lcars-blue-bg tall large-gap">Testing Large</li>
-                    <li class="lcars-tan-bg tall">Testing 2</li>
-                    <li class="lcars-blue-bg tall">Testing Large 2</li>
-                    <li class="lcars-tan-bg">Testing 3</li>
+                <ul class="lcars-menu" id="menu">
+                    <li class="lcars-blue-bg"><a href="#">LCARS 001</a></li>
                 </ul>
             </div>
-            <div class="lcars-column u-6-8">
+            <div class="lcars-column u-6-8 lcars-divider top lcars-tan-blue-divide">
+                <div class="lcars-row spaced">
+                    <div class="lcars-column u-2-6 text-column">
+                        {% block content %}
+                        {% endblock %}
 
-                {% block content %}
-                {% endblock %}
+                    </div>
+                    <div class="lcars-column u-1-6">
+                        <ul class="lcars-menu" id="menu">
+                            <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                            <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                            <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                            <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                            <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                        </ul>
+                    </div>
+                    <div class="lcars-column u-3-6">
+
+                        {% include 'form.html' %}
+                    </div>
+                </div>
             </div>
-            <div class="lcars-column u-1-8 lcars-elbow right lcars-blue-bg">
-                <a href="#">Side Button 4</a>
+            <div class="lcars-column u-1-8 lcars-elbow bottom right lcars-tan-bg">
             </div>
         </div>
         <div class="lcars-row spaced">
-            <div class="lcars-column u-2-8 lcars-elbow left large-gap lcars-blue-bg">
+            <div class="lcars-column tall u-1-8 bottom">
 
+                <ul class="lcars-menu spaced" id="menu">
+                    <li class="lcars-tan-bg"><a href="#">LCARS 001</a></li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.total }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.available }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.percent }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.used }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.free }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.active }}
+                    </li>
+                    <li class="lcars-tan-bg">
+                        {{ system_data_2.inactive }}
+                    </li>
+                    <li>
+                        <a href="#" class="lcars-button radius">
+                            Button
+                            <span class="lcars-button-addition">B1</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div class="lcars-column u-6-8">
-              {% include 'form.html' %}
+            <div class="lcars-column u-4-8 lcars-divider bottom lcars-tan-divide">
+                <ul>
+                    <li><p>Processor Percentage: {{ system_data_1 }}</p></li>
+                    <li>{{ system_data_2 }}</li>
+                </ul>
+            </div>
+
+            <div class="lcars-column u-1-8 lcars-elbow right lcars-blue-bg">
+
+                <a href="#">Side Button 4</a>
             </div>
 
         </div>
-        {% include "footer.html" %}
-
-
+        <footer id="footer">
+            {% include "footer.html" %}
+        </footer>
 
 
     {% endblock %}
+    <script>
+        var page_height = window.innerHeight;
+        var header = document.getElementById('header');
+        var footer = document.getElementById('footer');
+        var menu = document.getElementById('menu');
+        var small_button = document.getElementById('menu').getElementsByTagName("li")[0];
+        var large_button = document.getElementById('menu').getElementsByTagName("li")[1];
+        console.log(page_height + " " + header.clientHeight + " " + footer.clientHeight);
+        var bodyHeight = ((page_height) - (header.clientHeight + footer.clientHeight));
+        console.log(bodyHeight);
+        console.log(menu.clientHeight);
+        console.log(small_button.clientHeight * .01);
+        console.log(large_button.clientHeight * .01);
+        var section = menu.clientHeight / bodyHeight;
+        var division_number = section / ((small_button.clientHeight * .01) + (large_button.clientHeight * .01));
+        if (division_number === 1) {
+            menu.innerHTML += '<li class="lcars-blue-bg tall"></li><li class="lcars-tan-bg"></li>';
+        } else if (division_number > 1) {
+            menu.innerHTML += '<li class="lcars-tan-bg tall"></li><li class="lcars-tan-bg tall"></li><li class="lcars-tan-bg tall"></li>';
+        } else if (division_number < 1) {
+            if (division_number <= 0.5) {
+                menu.innerHTML += '<li class="lcars-tan-bg"></li>';
+            } else {
+                menu.innerHTML += '<li class="lcars-tan-bg"></li><li class="lcars-tan-bg"></li>';
+            }
+
+
+        }
+        console.log(section / ((small_button.clientHeight * .01) + (large_button.clientHeight * .01)));
+        console.log()
+
+    </script>
 </div>
 </body>
 </html>

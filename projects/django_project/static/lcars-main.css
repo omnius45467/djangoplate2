@@ -1779,3 +1779,16 @@ a.lcars-button .lcars-button-addition {
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
+
+
+
+
+/*Custom*/
+.text-column {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+}
+a, p{
+  font-size:1em;
+}
